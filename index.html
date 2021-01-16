@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Tugas Javascirpt</title>
+    <style type="text/css">
+        #container {
+            display: flex;
+            margin: 15px;
+            padding: 15px;
+        }
+        
+        #left {
+            width: 50%;
+            padding: 5px;
+            background-color: lightgrey;
+        }
+        
+        #right {
+            width: 50%;
+            padding: 5px;
+            background-color: burlywood;
+        }
+        
+        .divForm {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        
+        input[type=text],
+        input[type=number],
+        select {
+            width: 50%;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid darkcyan;
+            border-radius: 4px;
+        }
+        
+        button {
+            background-color: sandybrown;
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-decoration: none;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        
+        body {
+            background-color: cadetblue;
+        }
+        
+        .title {
+            background-color: sandybrown;
+            padding: 5px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: darkcyan;
+        }
+        
+        .quotes {
+            padding: 5px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: darkcyan;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        table td,
+        table th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        
+        h1 {
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div class="title">
+            <h1>Pemesanan Tiket Maskapai</h1>
+        </div>
+        <div id="left">
+            <div class="divForm">
+                <label for="nama" class="labelTitle">Nama Pemesan</label>
+                <input type="text" name="nama" id="nama">
+            </div>
+            <div class="divForm">
+                <label for="nama">Jumlah Tiket</label>
+                <input type="number" name="tiket" id="tiket">
+            </div>
+            <div class="divForm">
+                <label for="kelas">Kelas :</label>
+                <select name="kelas" id="kelas">
+                    <option value="Ekonomi">Ekonomi</option>
+                    <option value="Bisnis">Bisnis</option>
+                    <option value="Eksekutif">Eksekutif</option>
+                </select>
+            </div>
+            <div class="divForm">
+                <label for="tujuan">Tujuan :</label>
+                <select name="tujuan" id="tujuan">
+                    <option value="Bali">Bali</option>
+                </select>
+            </div>
+            <div class="divForm">
+                <label for="bagasi">Bagasi : </label>
+                <input type="radio" name="bagasi" id="5kg" value="5kg"><label for="5kg">5kg</label>
+                <input type="radio" name="bagasi" id="10kg" value="10kg"><label for="10kg">10kg</label>
+                <input type="radio" name="bagasi" id="15kg" value="15kg"><label for="15kg">15kg</label>
+            </div>
+            <div class="divForm">
+                <label for="asuransi">Asuransi :</label>
+                <input type="checkbox" name="asuransi" id="Asuransi Jiwa" value="Asuransi Jiwa"><label for="Asuransi Jiwa">Asuransi Jiwa</label>
+                <input type="checkbox" name="asuransi" id="Asuransi Kecelakaan" value="Asuransi Kecelakaan"><label for="Asuransi Kecelakaan">Asuransi Kecelakaan</label>
+                <input type="checkbox" name="asuransi" id="Asuransi Keterlambaan" value="Asuransi Keterlambaan"><label for="Asuransi Keterlambaan">Asuransi Keterlambaan</label>
+            </div>
+            <div class="divForm">
+                <button type="button" id="submit">Kirim</button>
+                <button type="reset">Batal</button>
+            </div>
+        </div>
+        <div id="right">
+            <div id="result">
+                <div class="quotes">
+                    <h1>Ayo Terbang</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        document.getElementById('submit').addEventListener('click', () => {
+            var nama = document.getElementById('nama').value;
+            var tiket = document.getElementById('tiket').value;
+            var kelas = document.getElementById('kelas').value;
+            var tujuan = document.getElementById('tujuan').value;
+            var bagasi = document.querySelector('input[name="bagasi"]:checked').value;
+            var asuransi = document.querySelectorAll('input[name="asuransi"]:checked');
+
+            var diskon = tiket >= 3 ? 30 : 0;
+            switch (kelas) {
+                case "Ekonomi":
+                    kelas = 'Ekonomi (Air Mineral)';
+                    harga = 1000000;
+                    break;
+                case 'Bisnis':
+                    kelas = 'Bisnis (Snack)';
+                    harga = 2000000;
+                    break;
+                case 'Eksekutif':
+                    kelas = 'Eksekutif (Makan)';
+                    harga = 3000000;
+                    break;
+                default:
+                    kelas = '';
+                    harga = 0;
+            }
+            switch (bagasi) {
+                case "5kg":
+                    buayaBagasi = 100000;
+                    bagasi = '5kg (' + buayaBagasi + ')';
+                    break;
+                case '10kg':
+                    buayaBagasi = 150000;
+                    bagasi = '10kg (' + buayaBagasi + ')';
+                    break;
+                case '15kg':
+                    buayaBagasi = 200000;
+                    bagasi = '15kg (' + buayaBagasi + ')';
+                    break;
+                default:
+                    buayaBagasi = 0;
+                    bagasi = `0kg`;
+            }
+
+            var biayaAsuransi = 0;
+            var dAsuransi = [];
+            for (i = 0; i < asuransi.length; i++) {
+                biayaAsuransi = biayaAsuransi + 50000;
+                dAsuransi.push(asuransi[i].value);
+            }
+            var hitungTiket = harga * tiket;
+            var hitungDiskon = (hitungTiket * diskon) / 100;
+            var totalHarga = hitungTiket - hitungDiskon + buayaBagasi + biayaAsuransi;
+
+            document.getElementById('result').innerHTML = `
+            <table border="1">
+                    <tr>
+                        <td>Nama Pemesan</td>
+                        <td>:</td>
+                        <td>${nama}</td>
+                    </tr>
+                    <tr>
+                        <td>Jumlah</td>
+                        <td>:</td>
+                        <td>${tiket}</td>
+                    </tr>
+                    <tr>
+                        <td>Kelas</td>
+                        <td>:</td>
+                        <td>${kelas}</td>
+                    </tr>
+                    <tr>
+                        <td>Tujuan</td>
+                        <td>:</td>
+                        <td>${tujuan}</td>
+                    </tr>
+                    <tr>
+                        <td>Bagasi</td>
+                        <td>:</td>
+                        <td>${bagasi}</td>
+                    </tr>
+                    <tr>
+                        <td>Asuransi</td>
+                        <td>:</td>
+                        <td>${dAsuransi.join(", ")} (${biayaAsuransi})</td>
+                    </tr>
+                    <tr>
+                        <td>Total Harga</td>
+                        <td>:</td>
+                        <td>${totalHarga}</td>
+                    </tr>
+                </table>
+            `;
+        });
+    </script>
+</body>
+
+</html>
